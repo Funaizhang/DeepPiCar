@@ -310,7 +310,7 @@ def test_photo(file):
 
 def test_video(video_file):
     lane_follower = HandCodedLaneFollower()
-    cap = cv2.VideoCapture(video_file + '.avi')
+    cap = cv2.VideoCapture(video_file)
 
     # skip first second of video.
     for i in range(3):
@@ -340,10 +340,11 @@ def test_video(video_file):
         cv2.destroyAllWindows()
 
 
+
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
 
-    test_video('/home/pi/DeepPiCar/driver/data/tmp/video01')
+    test_video('../data/tmp/car_video201128_170830.avi')
     #test_photo('/home/pi/DeepPiCar/driver/data/video/car_video_190427_110320_073.png')
     #test_photo(sys.argv[1])
     #test_video(sys.argv[1])
