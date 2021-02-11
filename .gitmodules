@@ -1,0 +1,3 @@
+[submodule "DeepPiCar"]
+	path = DeepPiCar
+	url = https://github.com/dctian/DeepPiCar
