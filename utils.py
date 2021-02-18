@@ -4,13 +4,12 @@ import time
 from typing import List
 import cv2
 
-
 class VideoProc:
-    def __init__(self, input_path: str, output_path: str):
+    def __init__(self, input_path: str, output_folder: str):
         self.video_file = input_path
-        self.output_path = output_path
-        if not os.path.exists(self.output_path):
-            os.makedirs(self.output_path)
+        self.output_folder = output_folder
+        if not os.path.exists(self.output_folder):
+            os.makedirs(self.output_folder)
 
     def extract_frame(self, times: List[int]) -> None:
         cap = cv2.VideoCapture(self.video_file)
@@ -25,8 +24,8 @@ class VideoProc:
 
             # Save the wanted frames
             if time_idx < len(times) and count == times[time_idx] * fps:
-                print(os.path.join(self.output_path, f'{count}.jpg'))
-                cv2.imwrite(os.path.join(self.output_path, f'{count}.jpg'), frame)
+                print(os.path.join(self.output_folder, f'{count}.jpg'))
+                cv2.imwrite(os.path.join(self.output_folder, f'{count}.jpg'), frame)
                 print(f'Successfully written frame at {times[time_idx]}s')
                 time_idx += 1
             count += 1
@@ -43,7 +42,7 @@ class VideoProc:
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
     input_path = 'car_video_objs201128_170702.avi'
-    output_path = 'images'
+    output_folder = 'images'
     times = [0.5, 1, 1.5, 2, 2.5, 3]
-    myVideoProc = VideoProc(input_path, output_path)
+    myVideoProc = VideoProc(input_path, output_folder)
     myVideoProc.extract_frame(times)
