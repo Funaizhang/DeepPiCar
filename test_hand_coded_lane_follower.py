@@ -1,15 +1,18 @@
 import logging
 import cv2
+import matplotlib.pyplot as plt
 
-from hand_coded_lane_follower import HandCodedLaneFollower
-from deep_pi_car import show_image
+from lane_follower import HandCodedLaneFollower
+
 
 class Test:
     def test_photo(self, file):
         land_follower = HandCodedLaneFollower()
         frame = cv2.imread(file)
         combo_image = land_follower.follow_lane(frame)
-        show_image('final', combo_image, True)
+        imgplot = plt.imshow(combo_image)
+        plt.show()
+        # cv2.imshow('final', combo_image)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
 
@@ -45,11 +48,9 @@ class Test:
             cv2.destroyAllWindows()
 
 
-
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
+    input_path = 'images/10.jpg'
+    output_path = ''
     myTest = Test()
-    myTest.test_video('/home/pi/DeepPiCar/driver/data/tmp/video01')
-    #test_photo('/home/pi/DeepPiCar/driver/data/video/car_video_190427_110320_073.png')
-    #test_photo(sys.argv[1])
-    #test_video(sys.argv[1])
+    myTest.test_photo(input_path)
